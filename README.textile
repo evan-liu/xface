@@ -2,6 +2,8 @@ h2. Xface: Simple UI-Unit develop tool.
 
 It's simple AsUnit/FlexUnit 4 style UI-Unit framework, but not for testing. It's a tool to reach and verify UI implementation fast.
 
+"Demo":http://eidiot.github.com/xface/index.html#DemoLink | "Source":http://github.com/eidiot/xface/tree/master/demo/
+
 h2. Example
 
 Runner:
