@@ -1,1 +1,177 @@
-My GitHub Page
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<script type="text/javascript" src="swfobject/swfobject.js">
+</script>
+		<script type="text/javascript">
+//<![CDATA[
+		swfobject.registerObject("Demo", "9.0.115", "expressInstall.swf");
+		//]]>
+		</script>
+		<title>
+			eidiot/xface @ GitHub
+		</title>
+		<style type="text/css">
+/*<![CDATA[*/
+		body {
+		margin-top: 1.0em;
+		background-color: #eeeff0;
+		  font-family: "Helvetica,Arial,FreeSans"; 
+		color: #000000;
+		}
+		#container {
+		margin: 0 auto;
+		width: 700px;
+		}
+		h1 { font-size: 3.8em; color: #b30ea6; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #b30ea6; }
+		h3 { text-align: center; color: #b30ea6; }
+		a { color: #b30ea6; }
+		.description { font-size: 1.2em; margin-bottom: 30px; margin-top: 30px; font-style: italic;}
+		.download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+		hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+		.footer { text-align:center; padding-top:30px; font-style: italic; }
+		/*]]>*/
+		</style>
+	</head>
+	<body>
+		<p>
+			<a href="http://github.com/eidiot/xface"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+		</p>
+		<div id="container">
+			<div class="download">
+				<a href="http://github.com/eidiot/xface/zipball/master"><img border="0" width="90" src="http://github.com/images/modules/download/zip.png" /></a> <a href="http://github.com/eidiot/xface/tarball/master"><img border="0" width="90" src="http://github.com/images/modules/download/tar.png" /></a>
+			</div>
+			<h1>
+				<a href="http://github.com/eidiot/xface">xface</a> <span class="small">by <a href="http://github.com/eidiot">eidiot</a></span>
+			</h1>
+			<div class="description">
+				A simple AsUnit/FlexUnit 4 style UI-Unit framework, but not for testing. It's a tool to reach and verify UI implementation fast.
+			</div>
+			<h2>
+				<a name="DemoLink" id="DemoLink"></a>Demo (<a href="http://github.com/eidiot/xface/tree/master/demo/" target="_blank" class="liexternal">source</a>)
+			</h2>
+			<div>
+				<object id="Demo" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="370" height="220">
+					<param name="movie" value="demo/DemoUIUnitRunner.swf" />
+					<!--[if !IE]>-->
+					<object type="application/x-shockwave-flash" data="demo/DemoUIUnitRunner.swf" width="370" height="220">
+						<!--<![endif]-->
+						<p>
+							Alternative content
+						</p><!--[if !IE]>-->
+					</object> <!--<![endif]-->
+				</object>
+			</div>
+			<h2>
+			    <a name="ExampleLink" id="ExampleLink"></a>Example
+			</h2>
+
+            Runner:
+
+            <pre>
+public function DemoUIUnitRunner()
+{
+    super();
+    run(AllUnits);
+    // Set the second parameter to an instantiate method of some DI-Container 
+    // if need more Dependency injection support.
+    // run(AllUnits, injector.instantiate);
+}
+            </pre>
+
+            Suite:
+
+            <pre>
+[Suite]
+// Use "label" to change the display name of the suite.
+// [Suite(label="All elements")]
+public class AllUnits
+{
+    public var _TextUnit:TextUnit;
+    public var _ShapeSuite:ShapeSuite;
+    public var _MinimalSuite:MinimalSuite;
+}
+            </pre>
+
+            Unit:
+
+            <pre>
+public class PushButtonUnit
+{
+    //======================================================================
+    //  Dependencies
+    //======================================================================
+    [Inject]
+    public var container:DisplayObjectContainer;
+    //======================================================================
+    //  Variables
+    //======================================================================
+    private var instance:PushButton;
+    //======================================================================
+    //  Public methods
+    //======================================================================
+    [Before]
+    public function setUp():void
+    {
+        instance = new PushButton();
+        container.addChild(instance);
+        instance.x = 10;
+        instance.y = 10;
+    }
+    [After]
+    public function tearDown():void
+    {
+        instance = null;
+    }
+    [Test]
+    public function toggle_is_false():void
+    {
+        instance.label = "Click me";
+        instance.toggle = false;
+    }
+    [Test]
+    public function toggle_is_true():void
+    {
+        instance.label = "Click me";
+        instance.toggle = true;
+        instance.selected = true;
+    }
+}
+            </pre>
+			<h2>
+				Authors
+			</h2>
+			<p>
+				eidiot (eidiot@gmail.com)<br />
+				<br />
+			</p>
+			<h2>
+				Contact
+			</h2>
+			<p>
+				eidiot (eidiot@gmail.com)<br />
+			</p>
+			<h2>
+				Download
+			</h2>
+			<p>
+				You can download this project in either <a href="http://github.com/eidiot/xface/zipball/master">zip</a> or <a href="http://github.com/eidiot/xface/tarball/master">tar</a> formats.
+			</p>
+			<p>
+				You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
+			</p>
+			<pre>
+$ git clone git://github.com/eidiot/xface
+</pre>
+			<div class="footer">
+				get the source code on GitHub : <a href="http://github.com/eidiot/xface">eidiot/xface</a>
+			</div>
+		</div>
+	</body>
+</html>
