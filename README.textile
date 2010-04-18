@@ -1,0 +1,77 @@
+h2. Xface: Simple UI-Unit develop tool.
+
+It's simple AsUnit/FlexUnit 4 style UI-Unit framework, but not for testing. It's a tool to reach and verify UI implementation fast.
+
+h2. Example
+
+Runner:
+
+<pre>
+    public function DemoUIUnitRunner()
+    {
+        super();
+        run(AllUnits);
+        // Set the second parameter to an instantiate method of some DI-Container if need more Dependency injection support.
+        // run(AllUnits, injector.instantiate);
+    }
+</pre>
+
+Suite:
+
+<pre>
+    [Suite]
+    // Use "label" to change the display name of the suite.
+    // [Suite(label="All elements")]
+    public class AllUnits
+    {
+        public var _TextUnit:TextUnit;
+        public var _ShapeSuite:ShapeSuite;
+        public var _MinimalSuite:MinimalSuite;
+    }
+</pre>
+
+Unit:
+
+<pre>
+    public class PushButtonUnit
+    {
+        //======================================================================
+        //  Dependencies
+        //======================================================================
+        [Inject]
+        public var container:DisplayObjectContainer;
+        //======================================================================
+        //  Variables
+        //======================================================================
+        private var instance:PushButton;
+        //======================================================================
+        //  Public methods
+        //======================================================================
+        [Before]
+        public function setUp():void
+        {
+            instance = new PushButton();
+            container.addChild(instance);
+            instance.x = 10;
+            instance.y = 10;
+        }
+        [After]
+        public function tearDown():void
+        {
+            instance = null;
+        }
+        [Test]
+        public function toggle_is_false():void
+        {
+            instance.label = "Click me";
+            instance.toggle = false;
+        }
+        [Test]
+        public function toggle_is_true():void
+        {
+            instance.label = "Click me";
+            instance.toggle = true;
+            instance.selected = true;
+        }
+    }
+</pre>
