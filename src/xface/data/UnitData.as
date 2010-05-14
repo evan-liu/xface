@@ -1,15 +1,36 @@
 package xface.data
 {
-    import xface.UnitMethod;
-    import xface.utils.removePostfix;
     import p2.reflect.Reflection;
     import p2.reflect.ReflectionMethod;
+
+    import xface.UnitMethod;
+    import xface.utils.removePostfix;
     /**
      * Data of the unit.
      * @author eidiot
      */
     public class UnitData
     {
+        //==========================================================================
+        //  Class variables
+        //==========================================================================
+        private static var postfixList:Array = [];
+        //==========================================================================
+        //  Class public methods
+        //==========================================================================
+        /**
+         * Add to be removed postfixes.
+         */
+        public static function addPostfix(...postfixes):void
+        {
+            for each (var postfix:String in postfixes)
+            {
+                if (postfixList.indexOf(postfix) == -1)
+                {
+                    postfixList.push(postfix);
+                }
+            }
+        }
         //======================================================================
         //  Constructor
         //======================================================================
@@ -25,9 +46,10 @@ package xface.data
             {
                 _name = _name.split("::")[1];
             }
-            _name = removePostfix(_name, "Unit");
-            _name = removePostfix(_name, "Case");
-            _name = removePostfix(_name, "Test");
+            for each (var postfix:String in postfixList)
+            {
+                _name = removePostfix(_name, postfix);
+            }
             _beforeMethods = getMethodsWithMetadata(reflection, "Before");
             _afterMethods = getMethodsWithMetadata(reflection, "After");
             _testMethods = getMethodsWithMetadata(reflection, "Test");

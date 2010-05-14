@@ -1,5 +1,4 @@
-package xface.ui
-{
+package xface.ui {
     import xface.BaseRunner;
     import xface.UnitMethod;
     import xface.data.SuiteData;

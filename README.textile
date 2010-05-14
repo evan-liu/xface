@@ -32,6 +32,23 @@ Suite:
     }
 </pre>
 
+Use variables will not have the same order. To have the order use suite method (use "suite" as method name and return an Array with classes):
+
+<pre>
+    [Suite]
+    public class AllUnits
+    {
+        public static function suite():Array
+        {
+            return [
+                TextUnit,
+                ShapeSuite,
+                MinimalSuite
+            ];
+        }
+    }
+</pre>
+
 Unit:
 
 <pre>
