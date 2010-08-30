@@ -134,7 +134,7 @@ package xface.data
             {
                 methods.push(new UnitMethod(this, methodReflection, metaDataName));
             }
-            methods.sortOn(["order", "name"]);
+            methods.sortOn(["order", "name"], Array.NUMERIC);
             return methods;
         }
     }
