@@ -50,7 +50,6 @@ package xface.ui
                 if (item.value is UnitMethod)
                 {
                     list.selectedItem = item;
-                    runner.runMethod(item.value);
                     return;
                 }
             }
