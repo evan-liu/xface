@@ -9,6 +9,7 @@ package xface.ui
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.errors.IllegalOperationError;
+    import flash.utils.Dictionary;
     /**
      * Abstract class for runner ui.
      * @author eidiot
@@ -35,6 +36,10 @@ package xface.ui
         protected var runner:BaseRunner;
         /** @private */
         protected var uiWidth:Number;
+        /** @private */
+        protected var methodMap:Dictionary = new Dictionary();
+        /** @private */
+        protected var firstMethodKey:String;
         //======================================================================
         //  Properties
         //======================================================================
@@ -86,6 +91,9 @@ package xface.ui
         protected function buildUI(elements:Array):void
         {
         }
+        //------------------------------
+        //  Parse to array methods
+        //------------------------------
         /** @private */
         protected function parseElementsToArray(elements:Array):Array
         {
@@ -124,6 +132,16 @@ package xface.ui
             }
         }
         /** @private */
+        protected function parseSuiteToArray(suite:SuiteData, target:Array):void
+        {
+            addDataToArray(target, "===== " + suite.name + " =====");
+            for each (var element:* in suite.elements)
+            {
+                parseElementToArray(element, target);
+            }
+
+        }
+        /** @private */
         protected function addDataToArray(target:Array, label:String, value:* = null):void
         {
             var data:Object = {"label":label};
@@ -133,15 +151,66 @@ package xface.ui
             }
             target.push(data);
         }
+        //------------------------------
+        //  Parse to xml methods
+        //------------------------------
         /** @private */
-        protected function parseSuiteToArray(suite:SuiteData, target:Array):void
+        protected function parseElementsToXML(elements:Array):XML
         {
-            addDataToArray(target, "===== " + suite.name + " =====");
+            var result:XML = <node />;
+            for each (var element:* in elements)
+            {
+                var child:XML = parseElementToXML(element);
+                if (child)
+                {
+                    result.appendChild(child);
+                }
+            }
+            return result;
+        }
+        /** @private */
+        protected function parseElementToXML(element:*):XML
+        {
+            if (element is UnitData)
+            {
+                return parseUnitToXML(element);
+            }
+            if (element is SuiteData)
+            {
+                return parseSuiteToXML(element);
+            }
+            return null;
+        }
+        /** @private */
+        protected function parseUnitToXML(unit:UnitData):XML
+        {
+            var testMethods:Array = unit.testMethods;
+            var result:XML = <node label={unit.name} />;
+            for each (var testMethod:UnitMethod in testMethods)
+            {
+                var key:String = unit.name + "/" + testMethod.name;
+                methodMap[key] = testMethod;
+                if (!firstMethodKey || !(firstMethodKey in methodMap))
+                {
+                    firstMethodKey = key;
+                }
+                result.appendChild(<node label={testMethod.name} data={key} />);
+            }
+            return result;
+        }
+        /** @private */
+        protected function parseSuiteToXML(suite:SuiteData):XML
+        {
+            var result:XML = <node label={suite.name} />;
             for each (var element:* in suite.elements)
             {
-                parseElementToArray(element, target);
+                var child:XML = parseElementToXML(element);
+                if (child)
+                {
+                    result.appendChild(child);
+                }
             }
-
+            return result;
         }
     }
 }
