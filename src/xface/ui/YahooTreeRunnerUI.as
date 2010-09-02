@@ -33,7 +33,7 @@ package xface.ui
         /** @private */
         override protected function buildUI(elements:Array):void
         {
-            tree.setSize(uiWidth, stage.stageWidth);
+            tree.setSize(uiWidth, stage.stageHeight);
             tree.x = stage.stageWidth - uiWidth;
             uiContainer.addChild(tree);
             var data:XML = parseElementsToXML(elements);
