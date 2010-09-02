@@ -1,4 +1,5 @@
-package xface.ui {
+package xface.ui
+{
     import xface.BaseRunner;
     import xface.UnitMethod;
     import xface.data.SuiteData;
@@ -20,9 +21,10 @@ package xface.ui {
         /**
          * Construct a <code>AbstractRunnerUI</code>.
          */
-        public function AbstractRunnerUI()
+        public function AbstractRunnerUI(width:Number = 150)
         {
             super();
+            uiWidth = width;
             addChild(contentContainer);
             addChild(uiContainer);
         }
@@ -31,6 +33,8 @@ package xface.ui {
         //======================================================================
         /** @private */
         protected var runner:BaseRunner;
+        /** @private */
+        protected var uiWidth:Number;
         //======================================================================
         //  Properties
         //======================================================================
@@ -68,12 +72,7 @@ package xface.ui {
             //--
             runner = new BaseRunner(contentContainer, unitFactory);
             var elements:Array = runner.parseElements(unitOrSuite);
-            var dataList:Array = [];
-            for each (var element:* in elements)
-            {
-                parseElementToData(element, dataList);
-            }
-            buildUI(dataList);
+            buildUI(elements);
             runFirst();
         }
         //======================================================================
@@ -84,23 +83,33 @@ package xface.ui {
         {
         }
         /** @private */
-        protected function buildUI(dataList:Array):void
+        protected function buildUI(elements:Array):void
         {
         }
         /** @private */
-        protected function parseElementToData(element:*, dataList:Array):void
+        protected function parseElementsToArray(elements:Array):Array
+        {
+            var result:Array = [];
+            for each (var element:* in elements)
+            {
+                parseElementToArray(element, result);
+            }
+            return result;
+        }
+        /** @private */
+        protected function parseElementToArray(element:*, target:Array):void
         {
             if (element is UnitData)
             {
-                parseUnitToData(element, dataList);
+                parseUnitToArray(element, target);
             }
             else if (element is SuiteData)
             {
-                parseSuiteToData(element, dataList);
+                parseSuiteToArray(element, target);
             }
         }
         /** @private */
-        protected function parseUnitToData(unit:UnitData, dataList:Array):void
+        protected function parseUnitToArray(unit:UnitData, target:Array):void
         {
             var testMethods:Array = unit.testMethods;
             var numMethods:int = testMethods.length;
@@ -111,26 +120,26 @@ package xface.ui {
                 {
                     label += " / " + testMethod.name;
                 }
-                addData(dataList, label, testMethod);
+                addDataToArray(target, label, testMethod);
             }
         }
         /** @private */
-        protected function addData(dataList:Array, label:String, value:* = null):void
+        protected function addDataToArray(target:Array, label:String, value:* = null):void
         {
             var data:Object = {"label":label};
             if (value != null)
             {
                 data.value = value;
             }
-            dataList.push(data);
+            target.push(data);
         }
         /** @private */
-        protected function parseSuiteToData(suite:SuiteData, dataList:Array):void
+        protected function parseSuiteToArray(suite:SuiteData, target:Array):void
         {
-            addData(dataList, "===== " + suite.name + " =====");
+            addDataToArray(target, "===== " + suite.name + " =====");
             for each (var element:* in suite.elements)
             {
-                parseElementToData(element, dataList);
+                parseElementToArray(element, target);
             }
 
         }

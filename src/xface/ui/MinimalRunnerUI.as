@@ -14,9 +14,9 @@ package xface.ui
         //======================================================================
         //  Constructor
         //======================================================================
-        public function MinimalRunnerUI()
+        public function MinimalRunnerUI(width:Number = 150)
         {
-            super();
+            super(width);
         }
         //======================================================================
         //  Properties
@@ -29,15 +29,16 @@ package xface.ui
         //  Overridden methods
         //======================================================================
         /** @private */
-        override protected function buildUI(dataList:Array):void
+        override protected function buildUI(elements:Array):void
         {
+            var dataList:Array = parseElementsToArray(elements);
             for each (var data:Object in dataList)
             {
                 list.addItem(data);
             }
             list.draw();
             uiContainer.addChild(list);
-            list.setSize(150, stage.stageHeight);
+            list.setSize(uiWidth, stage.stageHeight);
             list.x = stage.stageWidth - list.width;
             //
             list.addEventListener(Event.SELECT, changeHandler);
