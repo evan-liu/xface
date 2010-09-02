@@ -1,15 +1,14 @@
 package xface
 {
-    import xface.data.SuiteData;
-    import xface.data.UnitData;
     import p2.reflect.Reflection;
     import p2.reflect.ReflectionMember;
     import p2.reflect.ReflectionVariable;
 
+    import xface.data.SuiteData;
+    import xface.data.UnitData;
+    import xface.ui.DemoContentContainer;
     import xface.utils.isSuite;
     import xface.utils.isUnit;
-
-    import flash.display.DisplayObjectContainer;
     /**
      * Base runner.
      * @author eidiot
@@ -21,10 +20,10 @@ package xface
         //======================================================================
         /**
          * Construct a <code>Runner</code>.
-         * @param container     <code>DisplayObjectContainer</code> to display the ui.
+         * @param container     <code>DemoContentContainer</code> to display the ui.
          * @param unitFactory   Function to instantiate the ui-unit case.
          */
-        public function BaseRunner(container:DisplayObjectContainer,
+        public function BaseRunner(container:DemoContentContainer,
                                    unitFactory:Function = null)
         {
             this.container = container;
@@ -39,7 +38,7 @@ package xface
         /** @private */
         protected var unitFactory:Function = createUnit;
         /** @private */
-        protected var container:DisplayObjectContainer;
+        protected var container:DemoContentContainer;
         //--
         /** @private */
         protected var runningMethod:UnitMethod;
@@ -92,7 +91,8 @@ package xface
                     continue;
                 }
                 var variable:ReflectionVariable = ReflectionVariable(point);
-                if (variable.type == "flash.display::DisplayObjectContainer")
+                if (variable.type == "flash.display::DisplayObjectContainer" ||
+                    variable.type == "xface.ui::DemoContentContainer")
                 {
                     runningUnit[variable.name] = container;
                 }

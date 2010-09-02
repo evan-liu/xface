@@ -1,6 +1,7 @@
 package shapes
 {
-    import flash.display.DisplayObjectContainer;
+    import xface.ui.DemoContentContainer;
+
     import flash.display.Shape;
     /**
      * @author eidiot
@@ -11,7 +12,7 @@ package shapes
         //  Dependencies
         //======================================================================
         [Inject]
-        public var container:DisplayObjectContainer;
+        public var container:DemoContentContainer;
         //======================================================================
         //  Variables
         //======================================================================
@@ -26,11 +27,13 @@ package shapes
             container.addChild(shape);
             shape.x = 10;
             shape.y = 10;
+            container.color = 0x00Ff00;
         }
         [After]
         public function tearDown():void
         {
             shape = null;
+            container.color = 0xFFFFFF;
         }
         [Test]
         public function fill_color():void

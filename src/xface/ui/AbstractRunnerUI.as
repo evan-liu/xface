@@ -46,7 +46,7 @@ package xface.ui
         /**
          * Container for ui-unit content when run the unit methods.
          */
-        public const contentContainer:Sprite = new Sprite();
+        public const contentContainer:DemoContentContainer = new DemoContentContainer();
         /**
          * Container for unit-ui content to select the unit methods to run.
          */
