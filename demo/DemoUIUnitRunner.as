@@ -11,7 +11,7 @@ package
     {
         public function DemoUIUnitRunner()
         {
-            super();
+            super(150, true);
             run(AllUnits);
         }
     }

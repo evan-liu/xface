@@ -185,6 +185,7 @@ package xface.ui
         protected function parseUnitToXML(unit:UnitData):XML
         {
             var testMethods:Array = unit.testMethods;
+            var numMethods:int = testMethods.length;
             var result:XML = <node label={unit.name} />;
             for each (var testMethod:UnitMethod in testMethods)
             {
@@ -193,6 +194,10 @@ package xface.ui
                 if (!firstMethodKey || !(firstMethodKey in methodMap))
                 {
                     firstMethodKey = key;
+                }
+                if (numMethods == 1 && testMethod.name == "test")
+                {
+                    return <node label={unit.name} data={key} />;
                 }
                 result.appendChild(<node label={testMethod.name} data={key} />);
             }

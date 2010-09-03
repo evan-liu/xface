@@ -14,22 +14,16 @@ package xface.data
         //==========================================================================
         //  Class variables
         //==========================================================================
-        private static var postfixList:Array = [];
+        private static var postfixList:Array = ["Unit"];
         //==========================================================================
         //  Class public methods
         //==========================================================================
         /**
          * Add to be removed postfixes.
          */
-        public static function addPostfix(...postfixes):void
+        public static function setPostfix(...postfixes):void
         {
-            for each (var postfix:String in postfixes)
-            {
-                if (postfixList.indexOf(postfix) == -1)
-                {
-                    postfixList.push(postfix);
-                }
-            }
+            postfixList = postfixes;
         }
         //======================================================================
         //  Constructor
