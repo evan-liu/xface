@@ -9,12 +9,12 @@ package xface.ui
     /**
      * @author eidiot
      */
-    public class YahooTreeRunnerUI extends AbstractRunnerUI
+    public class TreeRunnerUI extends AbstractRunnerUI
     {
         //======================================================================
         //  Constructor
         //======================================================================
-        public function YahooTreeRunnerUI(width:Number = 150, openAllNode:Boolean = false)
+        public function TreeRunnerUI(width:Number = 150, openAllNode:Boolean = false)
         {
             super(width);
             this.openAllNode = openAllNode;

@@ -1,6 +1,6 @@
 package shapes
 {
-    import xface.ui.DemoContentContainer;
+    import xface.ui.ContentContainer;
 
     import flash.display.Shape;
     /**
@@ -12,7 +12,7 @@ package shapes
         //  Dependencies
         //======================================================================
         [Inject]
-        public var container:DemoContentContainer;
+        public var container:ContentContainer;
         //======================================================================
         //  Variables
         //======================================================================
@@ -27,17 +27,16 @@ package shapes
             container.addChild(shape);
             shape.x = 10;
             shape.y = 10;
-            container.color = 0x00Ff00;
         }
         [After]
         public function tearDown():void
         {
             shape = null;
-            container.color = 0xFFFFFF;
         }
         [Test]
         public function fill_color():void
         {
+            container.color = 0x00FF00;
             with (shape.graphics)
             {
                 beginFill(0xFF0000);
@@ -48,6 +47,7 @@ package shapes
         [Test]
         public function only_rim():void
         {
+            container.color = 0x0000FF;
             with (shape.graphics)
             {
                 lineStyle(0, 0xFF0000);

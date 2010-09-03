@@ -4,12 +4,12 @@ package xface.ui
     /**
      * @author eidiot
      */
-    public class DemoContentContainer extends Sprite
+    public class ContentContainer extends Sprite
     {
         //======================================================================
         //  Constructor
         //======================================================================
-        public function DemoContentContainer()
+        public function ContentContainer()
         {
             super();
         }
@@ -39,6 +39,20 @@ package xface.ui
                     drawRect(0, 0, stage.stageWidth, stage.stageHeight);
                     endFill();
                 }
+            }
+        }
+        //======================================================================
+        //  Public methods
+        //======================================================================
+        /**
+         * Clear the content container.
+         */
+        public function clear():void
+        {
+            graphics.clear();
+            while (numChildren > 0) 
+            {
+            	removeChildAt(0);
             }
         }
     }

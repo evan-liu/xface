@@ -6,7 +6,7 @@ package xface
 
     import xface.data.SuiteData;
     import xface.data.UnitData;
-    import xface.ui.DemoContentContainer;
+    import xface.ui.ContentContainer;
     import xface.utils.isSuite;
     import xface.utils.isUnit;
     /**
@@ -23,7 +23,7 @@ package xface
          * @param container     <code>DemoContentContainer</code> to display the ui.
          * @param unitFactory   Function to instantiate the ui-unit case.
          */
-        public function BaseRunner(container:DemoContentContainer,
+        public function BaseRunner(container:ContentContainer,
                                    unitFactory:Function = null)
         {
             this.container = container;
@@ -38,7 +38,7 @@ package xface
         /** @private */
         protected var unitFactory:Function = createUnit;
         /** @private */
-        protected var container:DemoContentContainer;
+        protected var container:ContentContainer;
         //--
         /** @private */
         protected var runningMethod:UnitMethod;
@@ -92,7 +92,7 @@ package xface
                 }
                 var variable:ReflectionVariable = ReflectionVariable(point);
                 if (variable.type == "flash.display::DisplayObjectContainer" ||
-                    variable.type == "xface.ui::DemoContentContainer")
+                    variable.type == "xface.ui::ContentContainer")
                 {
                     runningUnit[variable.name] = container;
                 }
@@ -117,10 +117,7 @@ package xface
             }
             runningMethod = null;
             runningUnit = null;
-            while (container.numChildren > 0)
-            {
-                container.removeChildAt(0);
-            }
+            container.clear();
         }
         /** @private */
         protected function createUnit(unitClass:Class):*
