@@ -1,29 +1,80 @@
 package
 {
+    import xface.ui.ContentContainer;
+    import xface.ui.ControlContainer;
+
+    import com.bit101.components.PushButton;
     import com.bit101.components.TextArea;
 
-    import flash.display.DisplayObjectContainer;
+    import flash.events.MouseEvent;
     /**
      * @author eidiot
      */
     public class TextUnit
     {
+    	//======================================================================
+    	//  Class constants
+    	//======================================================================
+    	private static const STEP:Number = 10;
         //======================================================================
         //  Dependencies
         //======================================================================
         [Inject]
-        public var container:DisplayObjectContainer;
+        public var container:ContentContainer;
+        [Inject]
+        public var controls:ControlContainer;
+        //======================================================================
+        //  Variables
+        //======================================================================
+        private var instance:TextArea;
         //======================================================================
         //  Public methods
         //======================================================================
+        [Before]
+        public function setUp():void
+        {
+        	container.color = 0xEEEFF0;
+
+        	instance = new TextArea();
+            container.addChild(instance);
+
+            controls.addToTop(createButton("Up", upHandler),
+                              createButton("Left", leftHandler),
+                              createButton("Right", rightHandler));
+            controls.addToBottom(createButton("Down", downHandler));
+        }
         [Test]
         public function test():void
         {
-            var textArea:TextArea = new TextArea();
-            container.addChild(textArea);
-            textArea.text = "Select ui-unit methods from the right list. \n Enjoy!";
-            textArea.x = 10;
-            textArea.y = 10;
+            instance.text = "Select ui-unit methods from the right list. \n Enjoy!";
+            instance.x = 100;
+            instance.y = 100;
+        }
+        //======================================================================
+        //  Private methods
+        //======================================================================
+        private function createButton(label:String, handler:Function):PushButton
+        {
+        	return new PushButton(null, 0, 0, label, handler);
+        }
+        //======================================================================
+        //  Event handlers
+        //======================================================================
+        private function upHandler(event:MouseEvent):void
+        {
+        	instance.y -= STEP;
+        }
+        private function downHandler(event:MouseEvent):void
+        {
+        	instance.y += STEP;
+        }
+        private function leftHandler(event:MouseEvent):void
+        {
+        	instance.x -= STEP;
+        }
+        private function rightHandler(event:MouseEvent):void
+        {
+        	instance.x += STEP;
         }
     }
 }

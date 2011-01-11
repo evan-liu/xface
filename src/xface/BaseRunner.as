@@ -7,6 +7,7 @@ package xface
     import xface.data.SuiteData;
     import xface.data.UnitData;
     import xface.ui.ContentContainer;
+    import xface.ui.ControlContainer;
     import xface.utils.isSuite;
     import xface.utils.isUnit;
     /**
@@ -23,10 +24,12 @@ package xface
          * @param container     <code>DemoContentContainer</code> to display the ui.
          * @param unitFactory   Function to instantiate the ui-unit case.
          */
-        public function BaseRunner(container:ContentContainer,
+        public function BaseRunner(contentContainer:ContentContainer,
+                                   controlContainer:ControlContainer,
                                    unitFactory:Function = null)
         {
-            this.container = container;
+            this.contentContainer = contentContainer;
+            this.controlContainer = controlContainer;
             if (unitFactory != null)
             {
                 this.unitFactory = unitFactory;
@@ -38,7 +41,9 @@ package xface
         /** @private */
         protected var unitFactory:Function = createUnit;
         /** @private */
-        protected var container:ContentContainer;
+        protected var contentContainer:ContentContainer;
+        /** @private */
+        protected var controlContainer:ControlContainer;
         //--
         /** @private */
         protected var runningMethod:UnitMethod;
@@ -91,10 +96,17 @@ package xface
                     continue;
                 }
                 var variable:ReflectionVariable = ReflectionVariable(point);
-                if (variable.type == "flash.display::DisplayObjectContainer" ||
-                    variable.type == "xface.ui::ContentContainer")
+                switch (variable.type)
                 {
-                    runningUnit[variable.name] = container;
+                	case "flash.display::DisplayObjectContainer":
+                	case "xface.ui::ContentContainer":
+                       runningUnit[variable.name] = contentContainer;
+                	   break;
+                	case "xface.ui::ControlContainer":
+                       runningUnit[variable.name] = controlContainer;
+                	   break;
+                	default:
+                	   break;
                 }
             }
             //-- Setup
@@ -117,7 +129,8 @@ package xface
             }
             runningMethod = null;
             runningUnit = null;
-            container.clear();
+            contentContainer.clear();
+            controlContainer.clear();
         }
         /** @private */
         protected function createUnit(unitClass:Class):*

@@ -27,6 +27,7 @@ package xface.ui
             super();
             uiWidth = width;
             addChild(contentContainer);
+            addChild(controlContainer);
             addChild(uiContainer);
         }
         //======================================================================
@@ -47,6 +48,8 @@ package xface.ui
          * Container for ui-unit content when run the unit methods.
          */
         public const contentContainer:ContentContainer = new ContentContainer();
+
+        public const controlContainer:ControlContainer = new ControlContainer();
         /**
          * Container for unit-ui content to select the unit methods to run.
          */
@@ -75,7 +78,7 @@ package xface.ui
             stage.scaleMode = StageScaleMode.NO_SCALE;
             stage.align = StageAlign.TOP_LEFT;
             //--
-            runner = new BaseRunner(contentContainer, unitFactory);
+            runner = new BaseRunner(contentContainer, controlContainer, unitFactory);
             var elements:Array = runner.parseElements(unitOrSuite);
             buildUI(elements);
             runFirst();
