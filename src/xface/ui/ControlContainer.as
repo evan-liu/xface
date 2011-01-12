@@ -67,6 +67,7 @@ package xface.ui
         	    {
         	    	continue;
         	    }
+        	    control.x = control.y = 0;
         	    addChild(control);
         	    var bounds:Rectangle = control.getBounds(this);
         	    control.x = topNext - bounds.x;
@@ -86,6 +87,7 @@ package xface.ui
         	    {
         	    	continue;
         	    }
+        	    control.x = control.y = 0;
         	    addChild(control);
         	    var bounds:Rectangle = control.getBounds(this);
         	    control.x = bottomNext - bounds.x;
