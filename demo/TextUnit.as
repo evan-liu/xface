@@ -41,7 +41,9 @@ package
             controls.addToTop(createButton("Up", upHandler),
                               createButton("Left", leftHandler),
                               createButton("Right", rightHandler));
-            controls.addToBottom(createButton("Down", downHandler));
+            controls.addToBottom(createButton("Down", downHandler), 
+                              createButton("Left", leftHandler),
+                              createButton("Right", rightHandler));
         }
         [Test]
         public function test():void

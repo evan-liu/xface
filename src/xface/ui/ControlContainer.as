@@ -55,6 +55,9 @@ package xface.ui
         //======================================================================
         //  Public methods
         //======================================================================
+        /**
+         * Add some controls to top of the container.
+         */
         public function addToTop(...controls):void
         {
         	if (topNext < _margin)
@@ -75,6 +78,9 @@ package xface.ui
         	    topNext += bounds.width + _space;
         	}
         }
+        /**
+         * Add some controls to bottom of the container.
+         */
         public function addToBottom(...controls):void
         {
         	if (bottomNext < margin)
@@ -92,7 +98,7 @@ package xface.ui
         	    var bounds:Rectangle = control.getBounds(this);
         	    control.x = bottomNext - bounds.x;
         	    control.y = stage.stageHeight - margin - bounds.height - bounds.y;
-        	    bottomNext = bounds.width + _space;
+        	    bottomNext += bounds.width + _space;
         	}
         }
         /**
