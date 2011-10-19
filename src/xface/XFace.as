@@ -5,11 +5,15 @@ package xface
     import xface.ui.MethodSelector;
 
     import com.bit101.components.CheckBox;
+    import com.bit101.components.ComboBox;
+    import com.bit101.components.Label;
     import com.bit101.components.PushButton;
+    import com.bit101.components.RadioButton;
 
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.errors.IllegalOperationError;
+    import flash.events.Event;
     public class XFace
     {
         //======================================================================
@@ -49,29 +53,55 @@ package xface
         {
             contentContainer.color = color;
         }
-        public static function addControlToTop(...controls):void
+        public static function addControlToTop(...controls):DisplayObject
         {
-            controlContainer.addToTop(controls);
+            return controlContainer.addToTop(controls);
         }
-        public static function addControlToBottom(...controls):void
+        public static function addControlToBottom(...controls):DisplayObject
         {
-            controlContainer.addToBottom(controls);
+            return controlContainer.addToBottom(controls);
         }
-        public static function addButtonToTop(label:String, handler:Function, width:Number = 50):void
+        public static function addLabelToTop(text:String):Label
         {
-            controlContainer.addToTop(createButton(label, handler, width));
+            return controlContainer.addToTop(new Label(null, 0, 0, text)) as Label;
         }
-        public static function addButtonToBottom(label:String, handler:Function, width:Number = 50):void
+        public static function addLabelToBottom(text:String):Label
         {
-            controlContainer.addToBottom(createButton(label, handler, width));
+            return controlContainer.addToBottom(new Label(null, 0, 0, text)) as Label;
         }
-        public static function addCheckBoxToTop(label:String, handler:Function, selected:Boolean = false):void
+        public static function addButtonToTop(label:String, handler:Function, width:Number = 50):PushButton
         {
-            controlContainer.addToTop(createCheckBox(label, handler, selected));
+            return controlContainer.addToTop(createButton(label, handler, width)) as PushButton;
         }
-        public static function addCheckBoxToBottom(label:String, handler:Function, selected:Boolean = false):void
+        public static function addButtonToBottom(label:String, handler:Function, width:Number = 50):PushButton
         {
-            controlContainer.addToBottom(createCheckBox(label, handler, selected));
+            return controlContainer.addToBottom(createButton(label, handler, width)) as PushButton;
+        }
+        public static function addCheckBoxToTop(label:String, handler:Function, selected:Boolean = false):CheckBox
+        {
+            return controlContainer.addToTop(createCheckBox(label, handler, selected)) as CheckBox;
+        }
+        public static function addCheckBoxToBottom(label:String, handler:Function, selected:Boolean = false):CheckBox
+        {
+            return controlContainer.addToBottom(createCheckBox(label, handler, selected)) as CheckBox;
+        }
+        public static function addRadioButtonToTop(label:String, handler:Function, selected:Boolean = false,
+                                                   groupName:String = "defaultRadioGroup"):RadioButton
+        {
+            return controlContainer.addToTop(createRadioButton(label, handler, selected, groupName)) as RadioButton;
+        }
+        public static function addRadioButtonToBottom(label:String, handler:Function, selected:Boolean = false,
+                                                      groupName:String = "defaultRadioGroup"):RadioButton
+        {
+            return controlContainer.addToBottom(createRadioButton(label, handler, selected, groupName)) as RadioButton;
+        }
+        public static function addComboBoxToTop(defaultLabel:String, items:Array, handler:Function):ComboBox
+        {
+            return controlContainer.addToTop(createComboBox(defaultLabel, items, handler)) as ComboBox;
+        }
+        public static function addComboBoxToBottom(defaultLabel:String, items:Array, handler:Function):ComboBox
+        {
+            return controlContainer.addToBottom(createComboBox(defaultLabel, items, handler)) as ComboBox;
         }
         //======================================================================
         //  Class private methods
@@ -87,6 +117,18 @@ package xface
         {
             var result:CheckBox = new CheckBox(null, 0, 0, label, handler);
             result.selected = selected;
+            return result;
+        }
+        private static function createRadioButton(label:String, handler:Function, selected:Boolean, groupName:String):RadioButton
+        {
+            var result:RadioButton = new RadioButton(null, 0, 0, label, selected, handler);
+            result.groupName = groupName;
+            return result;
+        }
+        private static function createComboBox(defaultLabel:String, items:Array, handler:Function):ComboBox
+        {
+            var result:ComboBox = new ComboBox(null, 0, 0, defaultLabel, items);
+            result.addEventListener(Event.SELECT, handler);
             return result;
         }
     }

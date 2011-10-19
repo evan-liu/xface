@@ -58,7 +58,7 @@ package xface.ui
         /**
          * Add some controls to top of the container.
          */
-        public function addToTop(...controls):void
+        public function addToTop(...controls):DisplayObject
         {
             if (topNext < _margin)
             {
@@ -81,11 +81,12 @@ package xface.ui
                 control.y = margin - bounds.y;
                 topNext += bounds.width + _space;
             }
+            return control;
         }
         /**
          * Add some controls to bottom of the container.
          */
-        public function addToBottom(...controls):void
+        public function addToBottom(...controls):DisplayObject
         {
             if (bottomNext < margin)
             {
@@ -108,6 +109,7 @@ package xface.ui
                 control.y = stage.stageHeight - margin - bounds.height - bounds.y;
                 bottomNext += bounds.width + _space;
             }
+            return control;
         }
         /**
          * Clear the container.
