@@ -47,7 +47,20 @@ package xface.ui
                 methodRunner.runMethod(firstMethod);
                 openAllNode ? tree.openAllNodes() :
                               tree.exposeNode("label", firstMethod.name);
+
+                var i:int = 0;
+                while (true)
+                {
+                    var d:Object = tree.getItemAt(i);
+                    if (d.data == parser.firstMethodKey)
+                    {
+                        tree.selectedIndex = i;
+                        break;
+                    }
+                    i++;
+                }
             }
+
         }
         //======================================================================
         //  Event handlers

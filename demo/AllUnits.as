@@ -13,8 +13,8 @@ package
         public static function suite():Array
         {
             return [
-                TextUnit,
                 MinimalSuite,
+                TextUnit,
                 ShapeSuite,
             ];
         }

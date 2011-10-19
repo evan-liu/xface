@@ -10,8 +10,8 @@ package minimal
         public static function suite():Array
         {
             return [
+                PushButtonUnit,
                 LabelUnit,
-                PushButtonUnit
             ];
         }
         /*
