@@ -2,7 +2,10 @@ package minimal
 {
     import xface.XFace;
 
+    import com.bit101.components.CheckBox;
     import com.bit101.components.PushButton;
+
+    import flash.events.Event;
     /**
      * @author eidiot
      */
@@ -19,7 +22,7 @@ package minimal
         public function setUp():void
         {
             instance = new PushButton();
-            XFace.display(instance, 10, 10);
+            XFace.display(instance, 10, 30);
         }
         [After]
         public function tearDown():void
@@ -38,6 +41,14 @@ package minimal
             instance.label = "Click me";
             instance.toggle = true;
             instance.selected = true;
+            XFace.addCheckBoxToTop("Toggle", toggleBox_changeHandler, true);
+        }
+        //======================================================================
+        //  Event handlers
+        //======================================================================
+        private function toggleBox_changeHandler(event:Event):void
+        {
+            instance.selected = CheckBox(event.target).selected;
         }
     }
 }

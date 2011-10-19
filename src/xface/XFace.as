@@ -4,6 +4,7 @@ package xface
     import xface.ui.ControlContainer;
     import xface.ui.MethodSelector;
 
+    import com.bit101.components.CheckBox;
     import com.bit101.components.PushButton;
 
     import flash.display.DisplayObject;
@@ -64,6 +65,14 @@ package xface
         {
             controlContainer.addToBottom(createButton(label, handler, width));
         }
+        public static function addCheckBoxToTop(label:String, handler:Function, selected:Boolean = false):void
+        {
+            controlContainer.addToTop(createCheckBox(label, handler, selected));
+        }
+        public static function addCheckBoxToBottom(label:String, handler:Function, selected:Boolean = false):void
+        {
+            controlContainer.addToBottom(createCheckBox(label, handler, selected));
+        }
         //======================================================================
         //  Class private methods
         //======================================================================
@@ -72,6 +81,12 @@ package xface
             var result:PushButton = new PushButton(null, 0, 0, label, handler);
             result.width = width;
             result.draw();
+            return result;
+        }
+        private static function createCheckBox(label:String, handler:Function, selected:Boolean):CheckBox
+        {
+            var result:CheckBox = new CheckBox(null, 0, 0, label, handler);
+            result.selected = selected;
             return result;
         }
     }
