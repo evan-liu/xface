@@ -15,7 +15,7 @@ package xface
      * Base runner.
      * @author eidiot
      */
-    public class BaseRunner
+    public class XFaceRunner
     {
         //======================================================================
         //  Constructor
@@ -25,7 +25,7 @@ package xface
          * @param container     <code>DemoContentContainer</code> to display the ui.
          * @param unitFactory   Function to instantiate the ui-unit case.
          */
-        public function BaseRunner(contentContainer:ContentContainer,
+        public function XFaceRunner(contentContainer:ContentContainer,
                                    controlContainer:ControlContainer,
                                    unitFactory:Function = null)
         {

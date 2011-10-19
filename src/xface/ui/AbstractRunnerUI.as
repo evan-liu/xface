@@ -5,7 +5,7 @@ package xface.ui
     import flash.display.StageScaleMode;
     import flash.errors.IllegalOperationError;
     import flash.utils.Dictionary;
-    import xface.BaseRunner;
+    import xface.XFaceRunner;
     import xface.data.SuiteData;
     import xface.data.UnitData;
     import xface.data.UnitMethod;
@@ -34,7 +34,7 @@ package xface.ui
         //  Variables
         //======================================================================
         /** @private */
-        protected var runner:BaseRunner;
+        protected var runner:XFaceRunner;
         /** @private */
         protected var uiWidth:Number;
         /** @private */
@@ -78,7 +78,7 @@ package xface.ui
             stage.scaleMode = StageScaleMode.NO_SCALE;
             stage.align = StageAlign.TOP_LEFT;
             //--
-            runner = new BaseRunner(contentContainer, controlContainer, unitFactory);
+            runner = new XFaceRunner(contentContainer, controlContainer, unitFactory);
             var elements:Array = runner.parseElements(unitOrSuite);
             buildUI(elements);
             runFirst();
