@@ -1,21 +1,18 @@
 package xface
 {
-    import p2.reflect.Reflection;
     import p2.reflect.ReflectionMember;
     import p2.reflect.ReflectionVariable;
-    import xface.data.SuiteData;
+
     import xface.data.UnitData;
-    import xface.data.UnitMethod;
     import xface.ui.ContentContainer;
     import xface.ui.ControlContainer;
-    import xface.utils.XFaceUtils;
 
 
     /**
      * Base runner.
      * @author eidiot
      */
-    public class XFaceRunner
+    public class MethodRunner
     {
         //======================================================================
         //  Constructor
@@ -25,7 +22,7 @@ package xface
          * @param container     <code>DemoContentContainer</code> to display the ui.
          * @param unitFactory   Function to instantiate the ui-unit case.
          */
-        public function XFaceRunner(contentContainer:ContentContainer,
+        public function MethodRunner(contentContainer:ContentContainer,
                                    controlContainer:ControlContainer,
                                    unitFactory:Function = null)
         {
@@ -53,22 +50,6 @@ package xface
         //======================================================================
         //  Public methods
         //======================================================================
-        /**
-         * Parse elements from the unit or suite class.
-         */
-        public function parseElements(unitOrSuite:Class):Array
-        {
-            var reflection:Reflection = Reflection.create(unitOrSuite);
-            if (XFaceUtils.isUnit(reflection))
-            {
-                return [new UnitData(unitOrSuite)];
-            }
-            if (XFaceUtils.isSuite(reflection))
-            {
-                return new SuiteData(unitOrSuite).elements;
-            }
-            return [];
-        }
         /**
          * Run a unit method.
          */

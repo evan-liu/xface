@@ -1,7 +1,7 @@
 package xface.utils
 {
     import p2.reflect.Reflection;
-    public class XFaceUtils
+    public class DataUtils
     {
         /**
          * Check if a Class is a suite.

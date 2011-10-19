@@ -5,7 +5,7 @@ package xface.data
     import p2.reflect.ReflectionMethod;
     import p2.reflect.ReflectionVariable;
 
-    import xface.utils.XFaceUtils;
+    import xface.utils.DataUtils;
 
     import flash.utils.getDefinitionByName;
     /**
@@ -49,7 +49,7 @@ package xface.data
                 }
                 for each (var postfix:String in postfixList)
                 {
-                    _name = XFaceUtils.removePostfix(_name, postfix);
+                    _name = DataUtils.removePostfix(_name, postfix);
                 }
             }
             //-- Elements
@@ -108,11 +108,11 @@ package xface.data
         }
         private function parseElement(elementClass:Class):void {
             var elementReflection:Reflection = Reflection.create(elementClass);
-            if (XFaceUtils.isUnit(elementReflection))
+            if (DataUtils.isUnit(elementReflection))
             {
                 _elements.push(new UnitData(elementClass));
             }
-            else if (XFaceUtils.isSuite(elementReflection))
+            else if (DataUtils.isSuite(elementReflection))
             {
                 _elements.push(new SuiteData(elementClass));
             }

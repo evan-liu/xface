@@ -1,18 +1,20 @@
 package
 {
-    import xface.ui.TreeRunnerUI;
+    import xface.XFace;
+
+    import flash.display.Sprite;
 
     [SWF(width="550", height="400", backgroundColor="0xFFFFFF", frameRate="30")]
 
     /**
      * @author eidiot
      */
-    public class DemoUIUnitRunner extends TreeRunnerUI
+    public class DemoUIUnitRunner extends Sprite
     {
         public function DemoUIUnitRunner()
         {
-            super(150, true);
-            run(AllUnits);
+            super();
+            XFace.run(this, AllUnits);
         }
     }
 }
