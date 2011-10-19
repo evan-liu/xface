@@ -1,8 +1,8 @@
 package shapes
 {
+    import flash.display.Shape;
     import xface.ui.ContentContainer;
 
-    import flash.display.Shape;
     /**
      * @author eidiot
      */

@@ -1,6 +1,5 @@
-package xface
+package xface.data
 {
-    import xface.data.UnitData;
     import p2.reflect.ReflectionMetaData;
     import p2.reflect.ReflectionMethod;
     /**

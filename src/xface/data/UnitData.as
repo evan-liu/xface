@@ -3,8 +3,8 @@ package xface.data
     import p2.reflect.Reflection;
     import p2.reflect.ReflectionMethod;
 
-    import xface.UnitMethod;
-    import xface.utils.removePostfix;
+    import xface.utils.XFaceUtils;
+
     /**
      * Data of the unit.
      * @author eidiot
@@ -42,7 +42,7 @@ package xface.data
             }
             for each (var postfix:String in postfixList)
             {
-                _name = removePostfix(_name, postfix);
+                _name = XFaceUtils.removePostfix(_name, postfix);
             }
             _beforeMethods = getMethodsWithMetadata(reflection, "Before");
             _afterMethods = getMethodsWithMetadata(reflection, "After");

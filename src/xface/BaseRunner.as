@@ -3,13 +3,14 @@ package xface
     import p2.reflect.Reflection;
     import p2.reflect.ReflectionMember;
     import p2.reflect.ReflectionVariable;
-
     import xface.data.SuiteData;
     import xface.data.UnitData;
+    import xface.data.UnitMethod;
     import xface.ui.ContentContainer;
     import xface.ui.ControlContainer;
-    import xface.utils.isSuite;
-    import xface.utils.isUnit;
+    import xface.utils.XFaceUtils;
+
+
     /**
      * Base runner.
      * @author eidiot
@@ -58,11 +59,11 @@ package xface
         public function parseElements(unitOrSuite:Class):Array
         {
             var reflection:Reflection = Reflection.create(unitOrSuite);
-            if (isUnit(reflection))
+            if (XFaceUtils.isUnit(reflection))
             {
                 return [new UnitData(unitOrSuite)];
             }
-            if (isSuite(reflection))
+            if (XFaceUtils.isSuite(reflection))
             {
                 return new SuiteData(unitOrSuite).elements;
             }
@@ -98,15 +99,15 @@ package xface
                 var variable:ReflectionVariable = ReflectionVariable(point);
                 switch (variable.type)
                 {
-                	case "flash.display::DisplayObjectContainer":
-                	case "xface.ui::ContentContainer":
+                    case "flash.display::DisplayObjectContainer":
+                    case "xface.ui::ContentContainer":
                        runningUnit[variable.name] = contentContainer;
-                	   break;
-                	case "xface.ui::ControlContainer":
+                       break;
+                    case "xface.ui::ControlContainer":
                        runningUnit[variable.name] = controlContainer;
-                	   break;
-                	default:
-                	   break;
+                       break;
+                    default:
+                       break;
                 }
             }
             //-- Setup

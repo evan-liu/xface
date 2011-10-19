@@ -1,15 +1,15 @@
 package xface.ui
 {
-    import xface.BaseRunner;
-    import xface.UnitMethod;
-    import xface.data.SuiteData;
-    import xface.data.UnitData;
-
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
     import flash.errors.IllegalOperationError;
     import flash.utils.Dictionary;
+    import xface.BaseRunner;
+    import xface.data.SuiteData;
+    import xface.data.UnitData;
+    import xface.data.UnitMethod;
+
     /**
      * Abstract class for runner ui.
      * @author eidiot

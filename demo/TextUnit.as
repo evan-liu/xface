@@ -1,12 +1,12 @@
 package
 {
+    import com.bit101.components.PushButton;
+    import com.bit101.components.TextArea;
+    import flash.events.MouseEvent;
     import xface.ui.ContentContainer;
     import xface.ui.ControlContainer;
 
-    import com.bit101.components.PushButton;
-    import com.bit101.components.TextArea;
 
-    import flash.events.MouseEvent;
     /**
      * @author eidiot
      */
