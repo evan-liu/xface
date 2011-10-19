@@ -24,9 +24,9 @@ package minimal
             instance = new Label();
             XFace.display(instance, 10, 30);
 
-            XFace.addLabelToTop("Label Text: ");
-            XFace.addRadioButtonToTop("ActionScript", g1RadioButton_clickHandler, true, "g1");
-            XFace.addRadioButtonToTop("JavaScript", g1RadioButton_clickHandler, false, "g1");
+            XFace.addLabel("Label Text: ");
+            XFace.addRadioButton("ActionScript", g1RadioButton_clickHandler, true, "g1");
+            XFace.addRadioButton("JavaScript", g1RadioButton_clickHandler, false, "g1");
 
             XFace.addLabelToBottom("Y: ");
             XFace.addRadioButtonToBottom("30", g2RadioButton_clickHandler, true, "g2");

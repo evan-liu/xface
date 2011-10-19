@@ -2,7 +2,7 @@ package xface.data
 {
     import p2.reflect.Reflection;
     import p2.reflect.ReflectionMethod;
-    import xface.UnitMethod;
+    import xface.core.UnitMethod;
     import xface.utils.DataUtils;
 
 

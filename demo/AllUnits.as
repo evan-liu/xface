@@ -14,8 +14,8 @@ package
         {
             return [
                 TextUnit,
+                MinimalSuite,
                 ShapeSuite,
-                MinimalSuite
             ];
         }
         /*

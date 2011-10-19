@@ -10,8 +10,8 @@ package shapes
         public static function suite():Array
         {
             return [
+                CircleUnit,
                 RectangleUnit,
-                CircleUnit
             ];
         }
         /*

@@ -1,4 +1,4 @@
-package xface
+package xface.core
 {
     import p2.reflect.ReflectionMetaData;
     import p2.reflect.ReflectionMethod;

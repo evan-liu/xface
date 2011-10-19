@@ -29,7 +29,7 @@ package shapes
         {
             shape = null;
         }
-        [Test]
+        [Test(order=1)]
         public function fill_color():void
         {
             with (shape.graphics)
@@ -44,9 +44,9 @@ package shapes
                 {label:"Greed", value:0x00FF00},
                 {label:"Blue", value:0x0000FF},
             ];
-            XFace.addComboBoxToTop("Select Color", colors, selectFillColorHandler);
+            XFace.addComboBox("Select Color", colors, selectFillColorHandler);
         }
-        [Test]
+        [Test(order=2)]
         public function only_rim():void
         {
             with (shape.graphics)

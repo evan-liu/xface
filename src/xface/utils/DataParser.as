@@ -1,12 +1,12 @@
 package xface.utils
 {
+    import flash.utils.Dictionary;
     import p2.reflect.Reflection;
-
-    import xface.UnitMethod;
+    import xface.core.UnitMethod;
     import xface.data.SuiteData;
     import xface.data.UnitData;
 
-    import flash.utils.Dictionary;
+
     public class DataParser
     {
         //======================================================================

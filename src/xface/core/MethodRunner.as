@@ -1,4 +1,4 @@
-package xface
+package xface.core
 {
     import p2.reflect.ReflectionMember;
     import p2.reflect.ReflectionVariable;

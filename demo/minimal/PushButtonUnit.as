@@ -35,13 +35,13 @@ package minimal
             instance.label = "Click me";
             instance.toggle = false;
         }
-        [Test]
+        [Test(order=-1)]
         public function toggle_is_true():void
         {
             instance.label = "Click me";
             instance.toggle = true;
             instance.selected = true;
-            XFace.addCheckBoxToTop("Toggle", toggleBox_changeHandler, true);
+            XFace.addCheckBox("Toggle", toggleBox_changeHandler, true);
         }
         //======================================================================
         //  Event handlers

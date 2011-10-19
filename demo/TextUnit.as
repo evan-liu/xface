@@ -6,7 +6,6 @@ package
 
     import flash.events.MouseEvent;
 
-
     /**
      * @author eidiot
      */
@@ -31,9 +30,9 @@ package
             instance = new TextArea();
             XFace.display(instance);
 
-            XFace.addButtonToTop("Up", upHandler);
-            XFace.addButtonToTop("Left", leftHandler),
-            XFace.addButtonToTop("Right", rightHandler);
+            XFace.addButton("Up", upHandler);
+            XFace.addButton("Left", leftHandler),
+            XFace.addButton("Right", rightHandler);
 
             XFace.addButtonToBottom("Down", downHandler),
             XFace.addButtonToBottom("Left", leftHandler),
