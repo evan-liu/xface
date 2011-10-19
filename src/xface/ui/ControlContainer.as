@@ -9,12 +9,12 @@ package xface.ui
      */
     public class ControlContainer extends Sprite
     {
-    	//======================================================================
-    	//  Constructor
-    	//======================================================================
+        //======================================================================
+        //  Constructor
+        //======================================================================
         public function ControlContainer()
         {
-        	super();
+            super();
         }
         //======================================================================
         //  Variables
@@ -27,7 +27,7 @@ package xface.ui
         //------------------------------
         //  margin
         //------------------------------
-        private var _margin:Number = 10;
+        private var _margin:Number = 2;
         /** Margin value of controls. */
         public function get margin():Number
         {
@@ -41,7 +41,7 @@ package xface.ui
         //------------------------------
         //  space
         //------------------------------
-        private var _space:Number = 5;
+        private var _space:Number = 3;
         /** Space between controls. */
         public function get space():Number
         {
@@ -60,53 +60,61 @@ package xface.ui
          */
         public function addToTop(...controls):void
         {
-        	if (topNext < _margin)
-        	{
-        		topNext = _margin;
-        	}
-        	for each (var control:DisplayObject in controls)
-        	{
-        	    if (!control)
-        	    {
-        	    	continue;
-        	    }
-        	    control.x = control.y = 0;
-        	    addChild(control);
-        	    var bounds:Rectangle = control.getBounds(this);
-        	    control.x = topNext - bounds.x;
-        	    control.y = margin - bounds.y;
-        	    topNext += bounds.width + _space;
-        	}
+            if (topNext < _margin)
+            {
+                topNext = _margin;
+            }
+            while (controls.length == 1 && controls[0] is Array)
+            {
+                controls = controls[0];
+            }
+            for each (var control:DisplayObject in controls)
+            {
+                if (!control)
+                {
+                    continue;
+                }
+                control.x = control.y = 0;
+                addChild(control);
+                var bounds:Rectangle = control.getBounds(this);
+                control.x = topNext - bounds.x;
+                control.y = margin - bounds.y;
+                topNext += bounds.width + _space;
+            }
         }
         /**
          * Add some controls to bottom of the container.
          */
         public function addToBottom(...controls):void
         {
-        	if (bottomNext < margin)
-        	{
-        		bottomNext = margin;
-        	}
-        	for each (var control:DisplayObject in controls)
-        	{
-        	    if (!control)
-        	    {
-        	    	continue;
-        	    }
-        	    control.x = control.y = 0;
-        	    addChild(control);
-        	    var bounds:Rectangle = control.getBounds(this);
-        	    control.x = bottomNext - bounds.x;
-        	    control.y = stage.stageHeight - margin - bounds.height - bounds.y;
-        	    bottomNext += bounds.width + _space;
-        	}
+            if (bottomNext < margin)
+            {
+                bottomNext = margin;
+            }
+            while (controls.length == 1 && controls[0] is Array)
+            {
+                controls = controls[0];
+            }
+            for each (var control:DisplayObject in controls)
+            {
+                if (!control)
+                {
+                    continue;
+                }
+                control.x = control.y = 0;
+                addChild(control);
+                var bounds:Rectangle = control.getBounds(this);
+                control.x = bottomNext - bounds.x;
+                control.y = stage.stageHeight - margin - bounds.height - bounds.y;
+                bottomNext += bounds.width + _space;
+            }
         }
         /**
          * Clear the container.
          */
         public function clear():void
         {
-        	while (numChildren > 0)
+            while (numChildren > 0)
             {
                 removeChildAt(0);
             }

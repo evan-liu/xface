@@ -1,17 +1,13 @@
 package shapes
 {
-    import flash.display.DisplayObjectContainer;
+    import xface.XFace;
+
     import flash.display.Shape;
     /**
      * @author eidiot
      */
     public class CircleUnit
     {
-        //======================================================================
-        //  Dependencies
-        //======================================================================
-        [Inject]
-        public var container:DisplayObjectContainer;
         //======================================================================
         //  Variables
         //======================================================================
@@ -23,9 +19,7 @@ package shapes
         public function setUp():void
         {
             shape = new Shape();
-            container.addChild(shape);
-            shape.x = 110;
-            shape.y = 110;
+            XFace.display(shape, 110, 110);
         }
         [After]
         public function tearDown():void

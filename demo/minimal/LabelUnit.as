@@ -1,18 +1,13 @@
 package minimal
 {
-    import com.bit101.components.Label;
+    import xface.XFace;
 
-    import flash.display.DisplayObjectContainer;
+    import com.bit101.components.Label;
     /**
      * @author eidiot
      */
     public class LabelUnit
     {
-        //======================================================================
-        //  Dependencies
-        //======================================================================
-        [Inject]
-        public var container:DisplayObjectContainer;
         //======================================================================
         //  Variables
         //======================================================================
@@ -24,9 +19,7 @@ package minimal
         public function setUp():void
         {
             instance = new Label();
-            container.addChild(instance);
-            instance.x = 10;
-            instance.y = 10;
+            XFace.display(instance, 10, 10);
         }
         [After]
         public function tearDown():void

@@ -4,6 +4,9 @@ package xface
     import xface.ui.ControlContainer;
     import xface.ui.MethodSelector;
 
+    import com.bit101.components.PushButton;
+
+    import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
     import flash.errors.IllegalOperationError;
     public class XFace
@@ -34,6 +37,42 @@ package xface
 
             methodRunner = new MethodRunner(contentContainer, controlContainer, unitFactory);
             methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode);
+        }
+        public static function display(target:DisplayObject, x:Number = 0, y:Number = 0):void
+        {
+            contentContainer.addChild(target);
+            target.x = x;
+            target.y = y;
+        }
+        public static function changeBackgroundColor(color:uint):void
+        {
+            contentContainer.color = color;
+        }
+        public static function addControlToTop(...controls):void
+        {
+            controlContainer.addToTop(controls);
+        }
+        public static function addControlToBottom(...controls):void
+        {
+            controlContainer.addToBottom(controls);
+        }
+        public static function addButtonToTop(label:String, handler:Function, width:Number = 50):void
+        {
+            controlContainer.addToTop(createButton(label, handler, width));
+        }
+        public static function addButtonToBottom(label:String, handler:Function, width:Number = 50):void
+        {
+            controlContainer.addToBottom(createButton(label, handler, width));
+        }
+        //======================================================================
+        //  Class private methods
+        //======================================================================
+        private static function createButton(label:String, handler:Function, width:Number):PushButton
+        {
+            var result:PushButton = new PushButton(null, 0, 0, label, handler);
+            result.width = width;
+            result.draw();
+            return result;
         }
     }
 }
