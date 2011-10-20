@@ -1,5 +1,6 @@
 package xface
 {
+    import flash.display.Sprite;
     import com.bit101.components.CheckBox;
     import com.bit101.components.ComboBox;
     import com.bit101.components.Label;
@@ -25,6 +26,16 @@ package xface
         private static var methodSelector:MethodSelector = new MethodSelector();
 
         private static var methodRunner:MethodRunner;
+        //======================================================================
+        //  Class properties
+        //======================================================================
+        /**
+         * Container to add demo contents.
+         */
+        public static function get container():Sprite
+        {
+            return contentContainer;
+        }
         //======================================================================
         //  Class public methods
         //======================================================================
