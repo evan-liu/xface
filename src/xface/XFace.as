@@ -65,9 +65,19 @@ package xface
             methodRunner = new MethodRunner(contentContainer, controlContainer, unitFactory);
             methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode, selectorTitle);
         }
+        /**
+         * Set title of the selector window.
+         */
         public static function setSelectorTitle(title:String):void
         {
             methodSelector.title = title;
+        }
+        /**
+         * Minimize the selector window.
+         */
+        public static function minimizeSelector():void
+        {
+            methodSelector.minimized = true;
         }
         /**
          * Display the demo target.
