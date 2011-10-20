@@ -24,11 +24,15 @@ package xface.ui
         //======================================================================
         //  Public methods
         //======================================================================
-        public function fill(runTarget:*, methodRunner:MethodRunner, selectorWidth:Number, openAllNode:Boolean):void
+        public function fill(runTarget:*, methodRunner:MethodRunner, selectorWidth:Number,
+                             openAllNode:Boolean, title:String):void
         {
             this.methodRunner = methodRunner;
+            if (title)
+            {
+                this.title = title;
+            }
 
-            title = "Selector";
             hasMinimizeButton = true;
             setSize(selectorWidth, stage.stageHeight);
             tree.addEventListener(ListEvent.ITEM_CLICK, itemClickHandler);

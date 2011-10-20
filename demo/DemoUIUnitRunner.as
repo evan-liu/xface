@@ -14,6 +14,7 @@ package
         public function DemoUIUnitRunner()
         {
             super();
+            XFace.setSelectorTitle("XFace demos");
             XFace.run(this, AllUnits);
         }
     }

@@ -40,7 +40,8 @@ package xface
         public static function run(container:DisplayObjectContainer, runTarget:*,
                                    unitFactory:Function = null,
                                    selectorWidth:Number = 150,
-                                   openAllNode:Boolean = true):void
+                                   openAllNode:Boolean = true,
+                                   selectorTitle:String = null):void
         {
             if (!container.stage)
             {
@@ -51,7 +52,11 @@ package xface
             container.addChild(methodSelector);
 
             methodRunner = new MethodRunner(contentContainer, controlContainer, unitFactory);
-            methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode);
+            methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode, selectorTitle);
+        }
+        public static function setSelectorTitle(title:String):void
+        {
+            methodSelector.title = title;
         }
         /**
          * Display the demo target.
