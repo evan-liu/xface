@@ -7,7 +7,7 @@
 </script>
 		<script type="text/javascript">
 //<![CDATA[
-		swfobject.registerObject("Demo", "9.0.115", "expressInstall.swf");
+		swfobject.registerObject("Demo", "10.0.0", "expressInstall.swf");
 		//]]>
 		</script>
 		<title>
@@ -75,13 +75,13 @@
             Runner:
 
             <pre>
-public function DemoUIUnitRunner()
+public class DemoRunner extends Sprite
 {
-    super();
-    run(AllUnits);
-    // Set the second parameter to an instantiate method of some DI-Container 
-    // if need more Dependency injection support.
-    // run(AllUnits, injector.instantiate);
+    public function DemoRunner()
+    {
+        super();
+        XFace.run(this, AllUnits);
+    }
 }
             </pre>
 
@@ -98,31 +98,36 @@ public class AllUnits
     public var _MinimalSuite:MinimalSuite;
 }
             </pre>
+            
+            Use variables will not have the same order. To have the order use suite method (use "suite" as method name and return an Array with classes):
+            
+            <pre>
+[Suite]
+public class AllUnits
+{
+    public static function suite():Array
+    {
+        return [
+            TextUnit,
+            ShapeSuite,
+            MinimalSuite
+        ];
+    }
+}
+            </pre>
 
             Unit:
 
             <pre>
 public class PushButtonUnit
 {
-    //======================================================================
-    //  Dependencies
-    //======================================================================
-    [Inject]
-    public var container:DisplayObjectContainer;
-    //======================================================================
-    //  Variables
-    //======================================================================
     private var instance:PushButton;
-    //======================================================================
-    //  Public methods
-    //======================================================================
+
     [Before]
     public function setUp():void
     {
         instance = new PushButton();
-        container.addChild(instance);
-        instance.x = 10;
-        instance.y = 10;
+        XFace.display(instance, 10, 30);
     }
     [After]
     public function tearDown():void
