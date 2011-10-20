@@ -50,10 +50,12 @@ package xface.ui
         public function clear():void
         {
             graphics.clear();
-            while (numChildren > 0) 
+            while (numChildren > 0)
             {
-            	removeChildAt(0);
+                removeChildAt(0);
             }
+            x = y = 0;
+            scaleX = scaleY = 1;
         }
     }
 }
