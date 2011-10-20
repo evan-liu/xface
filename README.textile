@@ -2,95 +2,85 @@ h2. Xface: Simple UI-Unit develop tool.
 
 It's simple AsUnit/FlexUnit 4 style UI-Unit framework, but not for testing. It's a tool to reach and verify UI implementation fast.
 
-"Demo":http://eidiot.github.com/xface/index.html#DemoLink | "Source":http://github.com/eidiot/xface/tree/master/demo/
+"Demo 1":http://eidiot.github.com/xface/index.html#DemoLink | "Source":http://github.com/eidiot/xface/tree/master/demo/
+"Demo 2":http://eidiot.github.com/xrope/index.html#DemoLink | "Source":https://github.com/eidiot/xrope/tree/master/examples
 
 h2. Example
 
 Runner:
 
 <pre>
-    public function DemoUIUnitRunner()
+public class DemoRunner extends Sprite
+{
+    public function DemoRunner()
     {
         super();
-        run(AllUnits);
-        // Set the second parameter to an instantiate method of some DI-Container if need more Dependency injection support.
-        // run(AllUnits, injector.instantiate);
+        XFace.run(this, AllUnits);
     }
+}
 </pre>
 
 Suite:
 
 <pre>
-    [Suite]
-    // Use "label" to change the display name of the suite.
-    // [Suite(label="All elements")]
-    public class AllUnits
-    {
-        public var _TextUnit:TextUnit;
-        public var _ShapeSuite:ShapeSuite;
-        public var _MinimalSuite:MinimalSuite;
-    }
+[Suite]
+// Use "label" to change the display name of the suite.
+// [Suite(label="All elements")]
+public class AllUnits
+{
+    public var _TextUnit:TextUnit;
+    public var _ShapeSuite:ShapeSuite;
+    public var _MinimalSuite:MinimalSuite;
+}
 </pre>
 
 Use variables will not have the same order. To have the order use suite method (use "suite" as method name and return an Array with classes):
 
 <pre>
-    [Suite]
-    public class AllUnits
+[Suite]
+public class AllUnits
+{
+    public static function suite():Array
     {
-        public static function suite():Array
-        {
-            return [
-                TextUnit,
-                ShapeSuite,
-                MinimalSuite
-            ];
-        }
+        return [
+            TextUnit,
+            ShapeSuite,
+            MinimalSuite
+        ];
     }
+}
 </pre>
 
 Unit:
 
 <pre>
-    public class PushButtonUnit
+public class PushButtonUnit
+{
+    private var instance:PushButton;
+
+    [Before]
+    public function setUp():void
     {
-        //======================================================================
-        //  Dependencies
-        //======================================================================
-        [Inject]
-        public var container:DisplayObjectContainer;
-        //======================================================================
-        //  Variables
-        //======================================================================
-        private var instance:PushButton;
-        //======================================================================
-        //  Public methods
-        //======================================================================
-        [Before]
-        public function setUp():void
-        {
-            instance = new PushButton();
-            container.addChild(instance);
-            instance.x = 10;
-            instance.y = 10;
-        }
-        [After]
-        public function tearDown():void
-        {
-            instance = null;
-        }
-        [Test]
-        public function toggle_is_false():void
-        {
-            instance.label = "Click me";
-            instance.toggle = false;
-        }
-        [Test]
-        public function toggle_is_true():void
-        {
-            instance.label = "Click me";
-            instance.toggle = true;
-            instance.selected = true;
-        }
+        instance = new PushButton();
+        XFace.display(instance, 10, 30);
     }
+    [After]
+    public function tearDown():void
+    {
+        instance = null;
+    }
+    [Test]
+    public function toggle_is_false():void
+    {
+        instance.label = "Click me";
+        instance.toggle = false;
+    }
+    [Test]
+    public function toggle_is_true():void
+    {
+        instance.label = "Click me";
+        instance.toggle = true;
+        instance.selected = true;
+    }
+}
 </pre>
