@@ -129,11 +129,6 @@ public class PushButtonUnit
         instance = new PushButton();
         XFace.display(instance, 10, 30);
     }
-    [After]
-    public function tearDown():void
-    {
-        instance = null;
-    }
     [Test]
     public function toggle_is_false():void
     {
