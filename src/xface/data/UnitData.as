@@ -24,6 +24,10 @@ package xface.data
          */
         public static function setPostfix(...postfixes):void
         {
+            while (postfixes.length == 1 && postfixes[0] as Array)
+            {
+                postfixes = postfixes[0];
+            }
             postfixList = postfixes;
         }
         //======================================================================

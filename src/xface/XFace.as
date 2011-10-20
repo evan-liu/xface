@@ -1,5 +1,7 @@
 package xface
 {
+    import xface.data.SuiteData;
+    import xface.data.UnitData;
     import flash.display.Sprite;
     import com.bit101.components.CheckBox;
     import com.bit101.components.ComboBox;
@@ -39,6 +41,20 @@ package xface
         //======================================================================
         //  Class public methods
         //======================================================================
+        /**
+         * Set postfixs to be removed in the test unit names.
+         */
+        public static function setUnitPostfix(...postfixes):void
+        {
+            UnitData.setPostfix(postfixes);
+        }
+        /**
+         * Set postfixs to be removed in the test suite names.
+         */
+        public static function setSuitePostfix(...postfixes):void
+        {
+            SuiteData.setPostfix(postfixes);
+        }
         /**
          * Run view unit demos.
          *
