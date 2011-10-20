@@ -31,10 +31,12 @@ package
             XFace.display(instance);
 
             XFace.addButton("Up", upHandler);
+            XFace.newLineForControls();
             XFace.addButton("Left", leftHandler),
             XFace.addButton("Right", rightHandler);
 
             XFace.addButtonToBottom("Down", downHandler),
+            XFace.newLineForBottomControls();
             XFace.addButtonToBottom("Left", leftHandler),
             XFace.addButtonToBottom("Right", rightHandler);
         }

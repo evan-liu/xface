@@ -56,6 +56,13 @@ package xface
             SuiteData.setPostfix(postfixes);
         }
         /**
+         * Set title of the selector window.
+         */
+        public static function setSelectorTitle(title:String):void
+        {
+            methodSelector.title = title;
+        }
+        /**
          * Run view unit demos.
          *
          * @param container         Root of the demo application.
@@ -80,13 +87,6 @@ package xface
 
             methodRunner = new MethodRunner(contentContainer, controlContainer, unitFactory);
             methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode, selectorTitle);
-        }
-        /**
-         * Set title of the selector window.
-         */
-        public static function setSelectorTitle(title:String):void
-        {
-            methodSelector.title = title;
         }
         /**
          * Minimize the selector window.
@@ -157,6 +157,14 @@ package xface
         public static function addComboBoxToBottom(defaultLabel:String, items:Array, handler:Function):ComboBox
         {
             return controlContainer.addToBottom(createComboBox(defaultLabel, items, handler)) as ComboBox;
+        }
+        public static function newLineForControls():void
+        {
+            controlContainer.newLineForTopControls();
+        }
+        public static function newLineForBottomControls():void
+        {
+            controlContainer.newLineForBottomControls();
         }
         //======================================================================
         //  Class private methods

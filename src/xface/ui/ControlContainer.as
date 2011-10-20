@@ -19,8 +19,13 @@ package xface.ui
         //======================================================================
         //  Variables
         //======================================================================
-        private var topNext:Number = 0;
-        private var bottomNext:Number = 0;
+        private var topNextX:Number = -1;
+        private var topLineY:Number = -1;
+        private var topLineHeight:Number = -1;
+
+        private var bottomNextX:Number = -1;
+        private var bottomLineY:Number = -1;
+        private var bottomLineHeight:Number = -1;
         //======================================================================
         //  Properties
         //======================================================================
@@ -60,9 +65,13 @@ package xface.ui
          */
         public function addToTop(...controls):DisplayObject
         {
-            if (topNext < _margin)
+            if (topNextX < 0)
             {
-                topNext = _margin;
+                topNextX = _margin;
+            }
+            if (topLineY < 0)
+            {
+                topLineY = _margin;
             }
             while (controls.length == 1 && controls[0] is Array)
             {
@@ -77,9 +86,13 @@ package xface.ui
                 control.x = control.y = 0;
                 addChild(control);
                 var bounds:Rectangle = control.getBounds(this);
-                control.x = topNext - bounds.x;
-                control.y = margin - bounds.y;
-                topNext += bounds.width + _space;
+                control.x = topNextX - bounds.x;
+                control.y = topLineY - bounds.y;
+                topNextX += bounds.width + _space;
+                if (control.height > topLineHeight)
+                {
+                    topLineHeight = control.height;
+                }
             }
             return control;
         }
@@ -88,9 +101,13 @@ package xface.ui
          */
         public function addToBottom(...controls):DisplayObject
         {
-            if (bottomNext < margin)
+            if (bottomNextX < 0)
             {
-                bottomNext = margin;
+                bottomNextX = _margin;
+            }
+            if (bottomLineY < 0)
+            {
+                bottomLineY = stage.stageHeight - _margin;
             }
             while (controls.length == 1 && controls[0] is Array)
             {
@@ -105,9 +122,13 @@ package xface.ui
                 control.x = control.y = 0;
                 addChild(control);
                 var bounds:Rectangle = control.getBounds(this);
-                control.x = bottomNext - bounds.x;
-                control.y = stage.stageHeight - margin - bounds.height - bounds.y;
-                bottomNext += bounds.width + _space;
+                control.x = bottomNextX - bounds.x;
+                control.y = bottomLineY - bounds.height - bounds.y;
+                bottomNextX += bounds.width + _space;
+                if (control.height > bottomLineHeight)
+                {
+                    bottomLineHeight = control.height;
+                }
             }
             return control;
         }
@@ -120,8 +141,26 @@ package xface.ui
             {
                 removeChildAt(0);
             }
-            topNext = 0;
-            bottomNext = 0;
+            topNextX = topLineY = topLineHeight = -1;
+            bottomNextX = bottomLineY = bottomLineHeight = -1;
+        }
+        public function newLineForTopControls():void
+        {
+            if (topLineHeight > 0)
+            {
+                topNextX = _margin;
+                topLineY += topLineHeight + _margin;
+                topLineHeight = 0;
+            }
+        }
+        public function newLineForBottomControls():void
+        {
+            if (bottomLineHeight > 0)
+            {
+                bottomNextX = _margin;
+                bottomLineY -= bottomLineHeight + _margin;
+                bottomLineHeight = 0;
+            }
         }
     }
 }
