@@ -144,6 +144,14 @@ package xface.ui
             topNextX = topLineY = topLineHeight = -1;
             bottomNextX = bottomLineY = bottomLineHeight = -1;
         }
+        public function addSpace(value:Number):void
+        {
+            topNextX += value;
+        }
+        public function addSpaceToBottom(value:Number):void
+        {
+            bottomNextX += value;
+        }
         public function newLineForTopControls():void
         {
             if (topLineHeight > 0)

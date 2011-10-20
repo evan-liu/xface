@@ -158,6 +158,14 @@ package xface
         {
             return controlContainer.addToBottom(createComboBox(defaultLabel, items, handler)) as ComboBox;
         }
+        public static function addSpace(value:Number = 10):void 
+        {
+            controlContainer.addSpace(value);
+        }
+        public static function addSpaceToBottom(value:Number = 10):void 
+        {
+            controlContainer.addSpaceToBottom(value);
+        }
         public static function newLineForControls():void
         {
             controlContainer.newLineForTopControls();

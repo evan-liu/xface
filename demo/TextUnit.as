@@ -36,7 +36,7 @@ package
             XFace.addButton("Right", rightHandler);
 
             XFace.addButtonToBottom("Down", downHandler),
-            XFace.newLineForBottomControls();
+            XFace.addSpaceToBottom();
             XFace.addButtonToBottom("Left", leftHandler),
             XFace.addButtonToBottom("Right", rightHandler);
         }
