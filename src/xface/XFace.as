@@ -1,21 +1,24 @@
 package xface
 {
+    import xface.core.MethodRunner;
+    import xface.data.RunnerData;
     import xface.data.SuiteData;
     import xface.data.UnitData;
-    import flash.display.Sprite;
+    import xface.ui.ContentContainer;
+    import xface.ui.ControlContainer;
+    import xface.ui.MethodSelector;
+
     import com.bit101.components.CheckBox;
     import com.bit101.components.ComboBox;
     import com.bit101.components.Label;
     import com.bit101.components.PushButton;
     import com.bit101.components.RadioButton;
+
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
+    import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
     import flash.events.Event;
-    import xface.core.MethodRunner;
-    import xface.ui.ContentContainer;
-    import xface.ui.ControlContainer;
-    import xface.ui.MethodSelector;
 
 
     public class XFace
@@ -26,6 +29,8 @@ package xface
         private static var contentContainer:ContentContainer = new ContentContainer();
         private static var controlContainer:ControlContainer = new ControlContainer();
         private static var methodSelector:MethodSelector = new MethodSelector();
+
+        private static var runnerData:RunnerData = new RunnerData();
 
         private static var methodRunner:MethodRunner;
         //======================================================================
@@ -54,6 +59,34 @@ package xface
         public static function setSuitePostfix(...postfixes):void
         {
             SuiteData.setPostfix(postfixes);
+        }
+        /**
+         * Add methods to run before every unit method.
+         */
+        public static function addSetUpMethods(...methods):void
+        {
+            runnerData.addSetUpMethods(methods);
+        }
+        /**
+         * Add methods to run after every unit method.
+         */
+        public static function addTearDownMethods(...methods):void
+        {
+            runnerData.addTearDownMethods(methods);
+        }
+        /**
+         * Map an injection point for [Inject] metadata in units.
+         */
+        public static function mapInjection(instance:*, ...types):void
+        {
+            runnerData.mapInjection(instance, types);
+        }
+        /**
+         * Get and mapped injection instance mapInjection() method.
+         */
+        public static function getInjection(type:Class):*
+        {
+            return runnerData.getInjection(type);
         }
         /**
          * Set title of the selector window.
@@ -85,7 +118,7 @@ package xface
             container.addChild(controlContainer);
             container.addChild(methodSelector);
 
-            methodRunner = new MethodRunner(contentContainer, controlContainer, unitFactory);
+            methodRunner = new MethodRunner(contentContainer, controlContainer, runnerData, unitFactory);
             methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode, selectorTitle);
         }
         /**
@@ -158,11 +191,11 @@ package xface
         {
             return controlContainer.addToBottom(createComboBox(defaultLabel, items, handler)) as ComboBox;
         }
-        public static function addSpace(value:Number = 10):void 
+        public static function addSpace(value:Number = 10):void
         {
             controlContainer.addSpace(value);
         }
-        public static function addSpaceToBottom(value:Number = 10):void 
+        public static function addSpaceToBottom(value:Number = 10):void
         {
             controlContainer.addSpaceToBottom(value);
         }
