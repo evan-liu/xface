@@ -8,6 +8,10 @@ package xface.data
         public const tearDownMethods:Vector.<Function> = new Vector.<Function>();
         public const injectionMap:Dictionary = new Dictionary();
 
+        public var unitFactory:Function = function(unitClass:Class):* {
+            return new unitClass();
+        };
+
         /**
          * Add methods to run before every unit method.
          */

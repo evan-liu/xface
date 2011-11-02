@@ -61,6 +61,14 @@ package xface
             SuiteData.setPostfix(postfixes);
         }
         /**
+         * Set factory method to create units.
+         * This method must accept an Class parameter and retun its one instance.
+         */
+        public static function setUnitFactory(unitFactory:Function):void
+        {
+            runnerData.unitFactory = unitFactory;
+        }
+        /**
          * Add methods to run before every unit method.
          */
         public static function addSetUpMethods(...methods):void
@@ -105,7 +113,6 @@ package xface
          * @param openAllNode       If open all node of the methods selector tree.
          */
         public static function run(container:DisplayObjectContainer, runTarget:*,
-                                   unitFactory:Function = null,
                                    selectorWidth:Number = 150,
                                    openAllNode:Boolean = true,
                                    selectorTitle:String = null):void
@@ -118,7 +125,7 @@ package xface
             container.addChild(controlContainer);
             container.addChild(methodSelector);
 
-            methodRunner = new MethodRunner(contentContainer, controlContainer, runnerData, unitFactory);
+            methodRunner = new MethodRunner(contentContainer, controlContainer, runnerData);
             methodSelector.fill(runTarget, methodRunner, selectorWidth, openAllNode, selectorTitle);
         }
         /**

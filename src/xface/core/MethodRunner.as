@@ -30,16 +30,11 @@ package xface.core
          */
         public function MethodRunner(contentContainer:ContentContainer,
                                      controlContainer:ControlContainer,
-                                     runnerData:RunnerData,
-                                     unitFactory:Function = null)
+                                     runnerData:RunnerData)
         {
             this.contentContainer = contentContainer;
             this.controlContainer = controlContainer;
             this.runnerData = runnerData;
-            if (unitFactory != null)
-            {
-                this.unitFactory = unitFactory;
-            }
 
             runnerData.mapInjection(contentContainer, DisplayObjectContainer, Sprite);
             runnerData.mapInjection(controlContainer);
@@ -47,8 +42,6 @@ package xface.core
         //======================================================================
         //  Variables
         //======================================================================
-        /** @private */
-        protected var unitFactory:Function = createUnit;
         /** @private */
         protected var contentContainer:ContentContainer;
         /** @private */
@@ -81,7 +74,7 @@ package xface.core
             runningMethod = method;
             var unitData:UnitData = runningMethod.unitData;
             //-- Create
-            runningUnit = unitFactory(unitData.unitClass);
+            runningUnit = runnerData.unitFactory(unitData.unitClass);
             //-- Inject
             var injectPoints:Array = unitData.reflection.getMembersByMetaData("Inject");
             for each (var point:ReflectionMember in injectPoints)
@@ -122,11 +115,6 @@ package xface.core
             {
                 tearDownMethod();
             }
-        }
-        /** @private */
-        protected function createUnit(unitClass:Class):*
-        {
-            return new unitClass();
         }
     }
 }
