@@ -47,8 +47,8 @@ package xface.ui
         /**
          * Draw a cross.
          */
-        public function drawCross(x:Number = 0, y:Number = 0, crossLength:int = 100,
-                                  crossColor:uint = 0x999999, crossAlpha:Number = 1):void
+        public function drawCross(x:Number, y:Number, crossLength:int,
+                                  crossColor:uint, crossAlpha:Number):void
         {
             var r:int = crossLength / 2;
             graphics.lineStyle(1, crossColor, crossAlpha);

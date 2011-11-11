@@ -16,7 +16,6 @@ package xface
 
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
-    import flash.display.Graphics;
     import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
     import flash.events.Event;
@@ -139,9 +138,9 @@ package xface
         /**
          * Display the demo target.
          */
-        public static function display(target:DisplayObject, x:Number = 0, y:Number = 0,
-                                       drawCross:Boolean = false, crossLength:int = 100,
-                                       crossColor:uint = 0x999999, crossAlpha:Number = 1):void
+        public static function display(target:DisplayObject, x:Number = 50, y:Number = 50,
+                                       drawCross:Boolean = false, crossLength:int = 50,
+                                       crossColor:uint = 0, crossAlpha:Number = 0.1):void
         {
             contentContainer.addChild(target);
             target.x = x;
@@ -152,8 +151,8 @@ package xface
                 contentContainer.drawCross(x, y, crossLength, crossColor, crossAlpha);
             }
         }
-        public static function drawCross(x:Number, y:Number, crossLength:int = 100,
-                                         crossColor:uint = 0x999999, crossAlpha:Number = 1):void
+        public static function drawCross(x:Number, y:Number, crossLength:int = 50,
+                                         crossColor:uint = 0, crossAlpha:Number = 0.1):void
         {
             contentContainer.drawCross(x, y, crossLength, crossColor, crossAlpha);
         }
