@@ -45,6 +45,19 @@ package xface.ui
         //  Public methods
         //======================================================================
         /**
+         * Draw a cross.
+         */
+        public function drawCross(x:Number = 0, y:Number = 0, crossLength:int = 100,
+                                  crossColor:uint = 0x999999, crossAlpha:Number = 1):void
+        {
+            var r:int = crossLength / 2;
+            graphics.lineStyle(1, crossColor, crossAlpha);
+            graphics.moveTo(x - r, y);
+            graphics.lineTo(x + r, y);
+            graphics.moveTo(x, y - r);
+            graphics.lineTo(x, y + r);
+        }
+        /**
          * Clear the content container.
          */
         public function clear():void

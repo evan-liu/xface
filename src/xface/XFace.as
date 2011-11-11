@@ -16,6 +16,7 @@ package xface
 
     import flash.display.DisplayObject;
     import flash.display.DisplayObjectContainer;
+    import flash.display.Graphics;
     import flash.display.Sprite;
     import flash.errors.IllegalOperationError;
     import flash.events.Event;
@@ -28,10 +29,10 @@ package xface
         //======================================================================
         private static var contentContainer:ContentContainer = new ContentContainer();
         private static var controlContainer:ControlContainer = new ControlContainer();
+
         private static var methodSelector:MethodSelector = new MethodSelector();
 
         private static var runnerData:RunnerData = new RunnerData();
-
         private static var methodRunner:MethodRunner;
         //======================================================================
         //  Class properties
@@ -138,11 +139,23 @@ package xface
         /**
          * Display the demo target.
          */
-        public static function display(target:DisplayObject, x:Number = 0, y:Number = 0):void
+        public static function display(target:DisplayObject, x:Number = 0, y:Number = 0,
+                                       drawCross:Boolean = false, crossLength:int = 100,
+                                       crossColor:uint = 0x999999, crossAlpha:Number = 1):void
         {
             contentContainer.addChild(target);
             target.x = x;
             target.y = y;
+
+            if (drawCross)
+            {
+                contentContainer.drawCross(x, y, crossLength, crossColor, crossAlpha);
+            }
+        }
+        public static function drawCross(x:Number, y:Number, crossLength:int = 100,
+                                         crossColor:uint = 0x999999, crossAlpha:Number = 1):void
+        {
+            contentContainer.drawCross(x, y, crossLength, crossColor, crossAlpha);
         }
         public static function changeBackgroundColor(color:uint):void
         {
